@@ -51,9 +51,10 @@
     "cross-env": "^7.0.2"
   },
   "scripts": {
-    "dev": "next -p 3003",
+    "dev": "next -p 3004",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "start-live": "next start"
   },
   "repository": {
     "type": "git",
