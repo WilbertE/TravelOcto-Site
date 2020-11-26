@@ -1,0 +1,38 @@
+{
+  "text": {
+    "linegroup": [
+      [
+        {
+          "type": "text",
+          "data": "Je kunt het beste naar {country.name} reizen in de"
+        },
+        {
+          "type": "array",
+          "single": " maand {country.bestTravelMonths}.",
+          "multiple": "maanden {country.bestTravelMonths}.",
+          "multipleLastDevider": "en"
+        },
+        {
+          "type": "text",
+          "data": "Er heerst dan een [aangename temperatuur|aangenaam klimaat]."
+        }
+      ],
+      [
+        {
+          "type": "text",
+          "data": "omdat [de temperatuur|het weer|het klimaat"
+        },
+        {
+          "type": "text",
+          "data": "in {country.name} in de"
+        },
+        {
+          "type": "array",
+          "single": " maand {country.bestTravelMonths} het meest [aangenaam is|fijn is].",
+          "multiple": "maanden {country.bestTravelMonths} het meest [aangenaam zijn|fijn zijn].",
+          "multipleLastDevider": "en"
+        }
+      ]
+    ]
+  }
+}
