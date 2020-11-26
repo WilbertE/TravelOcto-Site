@@ -54,7 +54,7 @@
     "dev": "next -p 3004",
     "build": "next build",
     "start": "next start -p 3004",
-    "start-live": "next start"
+    "start-live": "next start -p 3004"
   },
   "repository": {
     "type": "git",
