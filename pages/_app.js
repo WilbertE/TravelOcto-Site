@@ -6,6 +6,7 @@ import theme from "~/Theme/Theme";
 import GlobalStyle from "~/Theme/GlobalStyle";
 import {StylesProvider} from "@material-ui/core/styles";
 import {library} from "@fortawesome/fontawesome-svg-core";
+import {withRouter} from "next/router";
 import {
   faTimes,
   faSearch,
@@ -118,15 +119,31 @@ class App extends NextApp {
   componentDidMount() {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles && jssStyles.parentNode) jssStyles.parentNode.removeChild(jssStyles);
+    window.addEventListener("scroll", parallax);
   }
 
-  componentDidMount = () => {
-    window.addEventListener("scroll", parallax);
-  };
+  componentDidUpdate(prevProps) {
+    //Send page to google analytics
+  }
 
   componentWillUnmount = () => {
-    window.removeEventListener("scroll", parallax);
+    if (window) window.removeEventListener("scroll", parallax);
   };
+
+  constructor(props) {
+    super();
+
+    if (typeof window !== "undefined") {
+      if (window.location.hostname != "localhost") {
+        console.log("Triggered");
+        window.gtag("config", "G-WVKBW4QP0J", {
+          page_path: props.router.asPath,
+        });
+      } else {
+        console.log("NOT Triggered");
+      }
+    }
+  }
 
   render() {
     const {Component, pageProps} = this.props;
@@ -153,4 +170,4 @@ class App extends NextApp {
   }
 }
 
-export default App;
+export default withRouter(App);

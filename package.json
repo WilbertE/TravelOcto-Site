@@ -19,6 +19,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@stfy/react-editor.js": "^1.0.3",
+    "@types/gtag.js": "0.0.3",
     "@zeit/next-sass": "^1.0.1",
     "atob": "^2.1.2",
     "babel-plugin-styled-components": "^1.11.1",
