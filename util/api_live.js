@@ -1,8 +1,8 @@
 import fetch from "isomorphic-unfetch";
 import cookie from "js-cookie";
 import cookies from "next-cookies";
-export const TravelOctoBase = "http://api.travelocto.com/";
-export const ScoutingHawkBase = "http://api.scoutinghawk.com/";
+export const TravelOctoBase = "https://api.travelocto.com/";
+export const ScoutingHawkBase = "https://api.scoutinghawk.com/";
 
 const Api = function (options) {
   var globalOptions = {
