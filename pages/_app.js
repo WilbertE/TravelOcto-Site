@@ -61,6 +61,7 @@ import MessageboxRenderer from "~/components/molecules/Messagebox/MessageboxRend
 import MessageboxProvider from "~/components/molecules/Messagebox/MessageboxProvider";
 import {RecoilRoot} from "recoil";
 import parallax from "~/util/parallax";
+import {faFacebookF, faInstagram} from "@fortawesome/free-brands-svg-icons";
 
 library.add(
   faTimes,
@@ -107,7 +108,9 @@ library.add(
   faGameBoardAlt,
   faImagePolaroid,
   faAlignJustify,
-  faTags
+  faTags,
+  faFacebookF,
+  faInstagram
 );
 
 const GlobalStoreProvider = function (props) {

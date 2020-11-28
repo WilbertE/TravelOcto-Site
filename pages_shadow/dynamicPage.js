@@ -1,6 +1,7 @@
 import {useRecoilState} from "recoil";
 import Head from "~/components/atoms/head/Head";
 import ComponentRender from "~/components/pageComponents/ComponentRender";
+import Footer from "~/components/pageComponents/footer/Footer";
 import {pageRenderState} from "~/components/templates/pageRender/PageRenderAtom";
 import ErrorTemplate from "../components/templates/error/Error";
 
@@ -12,6 +13,7 @@ export default function DynamicPage({pageData, ...props}) {
     <>
       <Head {...pageData.meta} />
       <ComponentRender component={pageData.components} apiData={pageData.apiData} />
+      <Footer />
     </>
   );
 }
