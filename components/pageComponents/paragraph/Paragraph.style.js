@@ -7,9 +7,9 @@ const ParagraphPrimitive = function ({liveMode, bottomMargin, ...props}) {
 
 const StyledParagraph = styled(ParagraphPrimitive)`
   margin-top: 0;
-  margin-bottom: ${(props) => (props.bottomMargin == true ? "32px" : "0px")};
+  margin-bottom: ${(props) => (props.children.props.bottomMargin == true ? "32px" : props.bottomMargin == true ? "32px" : "0px")};
   > p {
-    margin-bottom: ${(props) => (props.bottomMargin == true ? "-12px" : "0px")};
+    margin-bottom: ${(props) => (props.children.props.bottomMargin == true ? "-12px" : props.bottomMargin == true ? "-12px" : "0px")};
   }
 `;
 

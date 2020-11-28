@@ -20,11 +20,11 @@ const Paragraph = function (props) {
 const Component = function ({component, ...props}) {
   const data = component.data;
   if (!data.renderDynamicText) {
-    return <StyledParagraph>{data.staticText}</StyledParagraph>;
+    return <StyledParagraph {...data}>{data.staticText}</StyledParagraph>;
   } else {
     return (
       <StyledParagraph>
-        <DynamicTextPresenter data={data.dynamicText} />
+        <DynamicTextPresenter {...data} data={data.dynamicText} />
       </StyledParagraph>
     );
   }
