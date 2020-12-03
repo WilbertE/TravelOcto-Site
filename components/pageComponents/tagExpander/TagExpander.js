@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useRecoilState} from "recoil";
 import IconButton from "~/components/atoms/iconButton/IconButton";
 import {pageRenderState} from "~/components/templates/pageRender/PageRenderAtom";
-import {deleteComponentState, updateComponentState} from "~/pages_shadow/cms/page/componentAtoms";
+import {deleteComponentState, updateComponentState} from "~/components/organisms/PageEditor/componentAtoms";
 import ComponentRender from "../ComponentRender";
 import TagsDialog from "./components/TagsDialog";
 import {StyledTagExpander} from "./TagExpander.style";

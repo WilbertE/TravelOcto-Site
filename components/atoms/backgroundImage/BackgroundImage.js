@@ -1,6 +1,6 @@
 import {StyledBackgroundImage} from "./BackgroundImage.style";
 import Api, {TravelOctoBase} from "~/util/api";
-import {generateScrSet, sortImagesBySize} from "~/pages_shadow/cms/page/components/util/imageHelper";
+import {generateScrSet, sortImagesBySize} from "~/components/organisms/PageEditor/components/util/imageHelper";
 import {faBars} from "@fortawesome/pro-light-svg-icons";
 
 const BackgroundImage = function ({image, alt, liveMode, ...props}) {

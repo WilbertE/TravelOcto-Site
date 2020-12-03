@@ -1,6 +1,6 @@
 import {useRecoilState} from "recoil";
 import Button from "~/components/atoms/button/Button";
-import {addComponentState} from "~/pages_shadow/cms/page/componentAtoms";
+import {addComponentState} from "~/components/organisms/PageEditor/componentAtoms";
 import {StyledComponentChooser} from "./ComponentChooser.style";
 import {v4 as guid} from "uuid";
 import DialogContent from "~/components/atoms/dialog/DialogContent";

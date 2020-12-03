@@ -52,6 +52,7 @@ import {
   faAlignJustify,
   faThLarge,
   faTags,
+  faFileAlt,
 } from "@fortawesome/pro-light-svg-icons";
 
 import {faExclamationTriangle} from "@fortawesome/pro-solid-svg-icons";
@@ -110,7 +111,8 @@ library.add(
   faAlignJustify,
   faTags,
   faFacebookF,
-  faInstagram
+  faInstagram,
+  faFileAlt
 );
 
 const GlobalStoreProvider = function (props) {

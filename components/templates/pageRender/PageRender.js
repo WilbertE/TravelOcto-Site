@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useRecoilState} from "recoil";
-import {pageState} from "~/pages_shadow/cms/page/pageAtoms";
+import {pageState} from "~/components/organisms/PageEditor/pageAtoms";
 import ComponentRender from "../../pageComponents/ComponentRender";
 import {StyledPageRender} from "./PageRender.style";
 import {pageRenderState} from "./PageRenderAtom";

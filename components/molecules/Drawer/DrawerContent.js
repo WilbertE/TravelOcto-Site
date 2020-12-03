@@ -12,7 +12,7 @@ const DrawerContent = function (props) {
   };
   registerMenuItem("tachometer-alt-fastest", "/cms/dashboard", "Dashboard");
   registerMenuItem("copy", "/cms/pages", "Pagina's");
-  registerMenuItem("align-left", "/cms/articles", "Artikelen");
+  registerMenuItem("align-left", "/cms/blogs", "Blogs");
 
   const handleMenuClick = (url) => router.push(url);
 

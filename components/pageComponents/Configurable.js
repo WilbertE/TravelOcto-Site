@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useRecoilState} from "recoil";
-import {deleteComponentState, updateComponentState} from "~/pages_shadow/cms/page/componentAtoms";
+import {deleteComponentState, updateComponentState} from "~/components/organisms/PageEditor/componentAtoms";
 import useForm from "~/util/form";
 import Button from "../atoms/button/Button";
 import DialogActions from "../atoms/dialog/DialogAction";
