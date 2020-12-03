@@ -45,6 +45,11 @@ const Api = function (options) {
   registerEndpoint("getCountryListByContintent", "GET", ScoutingHawkBase + "country/byContinentCode/{continentCode}", false);
   registerEndpoint("getCountryByIso2", "GET", ScoutingHawkBase + "country/byIso2/{iso2}", false);
   registerEndpoint("getCountryByUrlName", "GET", ScoutingHawkBase + "country/byUrlName/{urlName}", false);
+  registerEndpoint("addBlog", "POST", TravelOctoBase + "blog", true);
+  registerEndpoint("getBlogs", "GET", TravelOctoBase + "blog/all", true);
+  registerEndpoint("getBlog", "GET", TravelOctoBase + "blog/{blogId}", true);
+  registerEndpoint("saveBlogComponents", "PATCH", TravelOctoBase + "blog/{blogId}/components", true);
+  registerEndpoint("getBlogByUrl", "GET", TravelOctoBase + "blog?url={url}", false);
 
   this.fetch = (options) => {
     var defaultOptions = {
@@ -63,10 +68,10 @@ const Api = function (options) {
     options.urlReplacements.forEach((replacement) => (url = url.replace("{" + replacement[0] + "}", replacement[1])));
 
     //Set body
-    var body = options.body ? JSON.stringify(options.body) : null;
+    var body = options.body ? (options.postAsForm ? options.body : JSON.stringify(options.body)) : null;
 
     //Set headers
-    var headers = {"content-type": "application/json"};
+    var headers = !options.postAsForm ? {"content-type": "application/json"} : {};
 
     if (options.endpoint.authorization) {
       const token = options.context ? cookies(options.context).token : cookie.get("token");
@@ -116,5 +121,7 @@ const Api = function (options) {
     }
   };
 };
+
+export default Api;
 
 export default Api;
