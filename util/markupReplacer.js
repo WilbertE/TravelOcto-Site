@@ -1,3 +1,5 @@
+import {randomNumberWithSeed} from "./randomNumberWithSeed";
+
 const replaceMarkup = (str, id) => {
   let newStr = "";
 
@@ -7,7 +9,7 @@ const replaceMarkup = (str, id) => {
   });
 
   //replace new lines
-  newStr = str.replace(new RegExp(/\n/, "gi"), "<br/>");
+  newStr = newStr.replace(new RegExp(/\n/, "gi"), "<br/>");
 
   //Replace bold
   let arr = newStr.split(new RegExp(/\*\*(.*?)\*\*/, "gi"));
