@@ -123,5 +123,3 @@ const Api = function (options) {
 };
 
 export default Api;
-
-export default Api;
