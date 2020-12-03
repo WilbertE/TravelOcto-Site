@@ -1,3 +1,4 @@
+import {FooterLoader} from "~/components/pageComponents/footer/FooterLoader";
 import ErrorTemplate from "~/components/templates/error/Error";
 import Api from "~/util/api";
 import {pageTagLoader} from "~/util/pageTagLoader";
@@ -20,11 +21,20 @@ const GetPageData = async (ctx, url) => {
 };
 
 Page.getInitialProps = async ({query, ctx}) => {
+  //Get query
   if (query == "") query = "/";
   query = "/" + query.slug.join("/");
-  const pageData = await GetPageData(ctx, query);
+
+  //Load pagedata and footer data async
+  const pageDataRequest = GetPageData(ctx, query);
+  const footerDataRequest = FooterLoader();
+  const [pageData, footerData] = await Promise.all([pageDataRequest, footerDataRequest]);
+
+  //Parse pagedata
   await pageTagLoader(pageData, {queryTemplate: pageData.url, queryData: query});
-  return {pageData: pageData};
+
+  //Return page and footer data
+  return {pageData: pageData, footerData: footerData};
 };
 
 export default Page;

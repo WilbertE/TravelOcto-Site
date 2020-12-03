@@ -4,7 +4,7 @@ import IconButton from "~/components/atoms/iconButton/IconButton";
 import Title from "~/components/atoms/title/Title";
 import {StyledFooter} from "./Footer.style";
 
-const Footer = function (props) {
+const Footer = function ({data, ...props}) {
   return (
     <StyledFooter>
       <Container className="footer-container">
@@ -33,7 +33,7 @@ const Footer = function (props) {
               />
             </div>
           </Grid>
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={2}>
             <Title className="footer-title" component="h6" variant="h5">
               Populair
             </Title>
@@ -52,13 +52,20 @@ const Footer = function (props) {
               </li>
             </ul>
           </Grid>
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={4}>
             <Title className="footer-title" component="h6" variant="h5">
               Laatste artikelen
             </Title>
-            <ul className="footer-list">{/* <li>
-                <a href="#">Vakantiebestemming in Coronatijden</a>
-              </li> */}</ul>
+            <ul className="footer-list">
+              {data.blogs &&
+                data.blogs.map((blog, key) => {
+                  return (
+                    <li key={key}>
+                      <a href={"/blog" + blog.url}>{blog.name}</a>
+                    </li>
+                  );
+                })}
+            </ul>
           </Grid>
           <Grid item xs={6} md={3}>
             <Title className="footer-title" component="h6" variant="h5">

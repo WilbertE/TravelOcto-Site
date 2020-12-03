@@ -46,7 +46,8 @@ const Api = function (options) {
   registerEndpoint("getCountryByIso2", "GET", ScoutingHawkBase + "country/byIso2/{iso2}", false);
   registerEndpoint("getCountryByUrlName", "GET", ScoutingHawkBase + "country/byUrlName/{urlName}", false);
   registerEndpoint("addBlog", "POST", TravelOctoBase + "blog", true);
-  registerEndpoint("getBlogs", "GET", TravelOctoBase + "blog/all", true);
+  registerEndpoint("getBlogs", "GET", TravelOctoBase + "blog/all", false);
+  registerEndpoint("getBlogsSortedLimit", "GET", TravelOctoBase + "blog/all?sortMethod={sortMethod}&sortKey={sortKey}&limit={limit}", false);
   registerEndpoint("getBlog", "GET", TravelOctoBase + "blog/{blogId}", true);
   registerEndpoint("saveBlogComponents", "PATCH", TravelOctoBase + "blog/{blogId}/components", true);
   registerEndpoint("getBlogByUrl", "GET", TravelOctoBase + "blog?url={url}", false);

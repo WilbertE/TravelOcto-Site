@@ -21,7 +21,9 @@ const BlogProvider = function (props) {
   }, [fetchStore]);
 
   const loadBlogs = async () => {
-    const response = await api.fetch({endpoint: api.endpoints.getBlogs});
+    const response = await api.fetch({
+      endpoint: api.endpoints.getBlogs,
+    });
     if (!response.success) MessageboxStoreManager.AddMessage(messageboxStateAtom, response.message);
     if (response.success) setBlogsStore(response.result);
   };

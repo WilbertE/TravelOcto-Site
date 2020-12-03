@@ -1,3 +1,4 @@
+import {FooterLoader} from "~/components/pageComponents/footer/FooterLoader";
 import Api from "~/util/api";
 import {pageTagLoader} from "~/util/pageTagLoader";
 import DynamicPage from "./dynamicPage";
@@ -17,10 +18,17 @@ const GetPageData = async (ctx, url) => {
   return response.success ? response.result : null;
 };
 
-Page.getInitialProps = async (ctx) => {
-  const pageData = await GetPageData(ctx, "/");
+Page.getInitialProps = async ({query, ctx}) => {
+  //Load pagedata and footer data async
+  const pageDataRequest = GetPageData(ctx, "/");
+  const footerDataRequest = FooterLoader();
+  const [pageData, footerData] = await Promise.all([pageDataRequest, footerDataRequest]);
+
+  //Parse pagedata
   await pageTagLoader(pageData);
-  return {pageData: pageData};
+
+  //Return page and footer data
+  return {pageData: pageData, footerData: footerData};
 };
 
 export default Page;
