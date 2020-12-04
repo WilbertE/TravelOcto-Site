@@ -28,7 +28,11 @@ const BlogProvider = function (props) {
     if (response.success) setBlogsStore(response.result);
   };
 
-  return <BlogContext.Provider value={{store: blogsStore, fetchStore: setFetchStore, loading: loading}}>{props.children}</BlogContext.Provider>;
+  return (
+    <BlogContext.Provider value={{store: blogsStore, fetchStore: setFetchStore, loading: loading, setLoading: setLoading}}>
+      {props.children}
+    </BlogContext.Provider>
+  );
 };
 
 export default BlogProvider;

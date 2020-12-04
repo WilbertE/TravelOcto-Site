@@ -33,7 +33,6 @@ const Blog = function (props) {
   });
 
   const handleSaveComponents = async (page) => {
-    console.log("SAVEE");
     const {id, components} = page;
     setPage(page);
     const response = await api.fetch({
