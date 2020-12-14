@@ -37,6 +37,7 @@ const apiEndpoints = function (TravelOctoBase, ScoutingHawkBase) {
   registerEndpoint("saveBlogComponents", "PATCH", TravelOctoBase + "blog/{blogId}/components", true);
   registerEndpoint("getBlogByUrl", "GET", TravelOctoBase + "blog?url={url}", false);
   registerEndpoint("deleteBlog", "DELETE", TravelOctoBase + "blog/{blogId}", true);
+  registerEndpoint("deletePage", "DELETE", TravelOctoBase + "page/{pageId}", true);
 
   return endpoints;
 };

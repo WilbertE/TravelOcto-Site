@@ -26,7 +26,11 @@ const PageProvider = function (props) {
     if (response.success) setPagesStore(response.result);
   };
 
-  return <PageContext.Provider value={{store: pagesStore, fetchStore: setFetchStore, loading: loading}}>{props.children}</PageContext.Provider>;
+  return (
+    <PageContext.Provider value={{store: pagesStore, fetchStore: setFetchStore, loading: loading, setLoading: setLoading}}>
+      {props.children}
+    </PageContext.Provider>
+  );
 };
 
 export default PageProvider;
