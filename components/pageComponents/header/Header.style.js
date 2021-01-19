@@ -39,7 +39,7 @@ const StyledHeader = styled(HeaderPrimitive)`
     bottom: 0;
     width: 100%;
     display: block;
-    background-color: ${(props) => props.theme.color.secondary.base};
+    background-color: #da4167;
     content: "";
     height: 8px;
     box-shadow: 0 0px 24px 16px rgba(0, 0, 0, 0.3);

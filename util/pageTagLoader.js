@@ -1,5 +1,6 @@
 import {CompassCalibrationSharp} from "@material-ui/icons";
 import Api from "./api";
+import JsonSaveString from "./jsonSaveString";
 import {numberToStringConverter} from "./numberToStringConverter";
 import {retrieveJsonProperty} from "./retrieveJsonProperty";
 
@@ -106,12 +107,29 @@ const parseStringWithTags = function (string, tagData) {
     if (match) {
       var variable = "{" + match[1].replace("#", "") + "}";
       var variable = retrieveJsonProperty(tagData, variable);
-      if (match[1].startsWith("#")) variable = numberToStringConverter(variable);
-      newString = newString.split(match[0]).join(variable);
+
+      // if (match[1].startsWith("#")) variable = numberToStringConverter(variable);
+      // newString = newString.split(match[0]).join(variable);
+      if (typeof variable != "object" || string.indexOf('"id"') > -1) {
+        if (match[1].startsWith("#")) variable = numberToStringConverter(variable);
+        newString = newString.split(match[0]).join(variable);
+      } else {
+        if (!IsJsonString(variable) && typeof variable == "string") variable = JsonSaveString(variable);
+        newString = JSON.stringify(variable);
+      }
     }
   } while (match);
   return newString;
 };
+
+function IsJsonString(str) {
+  try {
+    var json = JSON.parse(str);
+    return typeof json === "object";
+  } catch (e) {
+    return false;
+  }
+}
 
 const parseComponentDataWithTags = function (data, tagData) {
   Object.keys(data).forEach((key) => {
@@ -120,7 +138,12 @@ const parseComponentDataWithTags = function (data, tagData) {
       if (value.indexOf("{") > -1) data[key] = parseStringWithTags(value, tagData);
     } else if (Array.isArray(value)) {
       var flatArray = JSON.stringify(value);
-      if (flatArray.indexOf("{") > -1) data[key] = JSON.parse(parseStringWithTags(flatArray, tagData));
+      var parsed = parseStringWithTags(flatArray, tagData).replace(/[\r\n]+/g, " ");
+      try {
+        if (flatArray.indexOf("{") > -1) data[key] = JSON.parse(parsed);
+      } catch (err) {
+        console.log("ERR", err, parsed);
+      }
     } else if (typeof value === "object" && value !== null) {
       parseComponentDataWithTags(value, tagData);
     }
@@ -128,8 +151,22 @@ const parseComponentDataWithTags = function (data, tagData) {
   return data;
 };
 
+const loadMenu = async function (menuId) {
+  const api = new Api();
+  var response = await api.fetch({
+    endpoint: api.endpoints.readMenu,
+    urlReplacements: [["menuId", menuId]],
+  });
+  if (response.success) return response.result;
+  return null;
+};
+
 const parseComponentWithTags = async function (component, tagData, queryData) {
   let itterationTagData;
+  if (component.name == "menu") {
+    var menu = await loadMenu(component.data.menuId);
+    if (menu != null) component.data.menu = menu;
+  }
   if (component.name == "tagExpander") {
     //Load tags in tagExpander
     var tags = await loadTags(component.data && component.data.tags ? component.data.tags : component.tags, queryData, tagData);
@@ -140,9 +177,37 @@ const parseComponentWithTags = async function (component, tagData, queryData) {
   if (itterationTagData == null) itterationTagData = tagData;
 
   //If item is gridCollectionCell then loop through children
+
+  if (component.name == "tabs" && component.data.array && component.data.array != "") {
+    var arrayData = retrieveJsonProperty(itterationTagData, component.data.array);
+    component.apiData = arrayData;
+
+    if (Array.isArray(arrayData)) {
+      //Get clone of child array of component because this needs to be set for every array item
+      var childTemplate = JSON.parse(JSON.stringify(component.children));
+
+      //Create new children array
+      component.children = [];
+      await Promise.all(
+        arrayData.map(async (data) => {
+          const newTagData = JSON.parse(JSON.stringify(itterationTagData));
+          newTagData.push({name: component.data.array.replace("{", "").replace("}", "") + "[]", apiData: data});
+          //Clone the child template for a new child
+          var child = JSON.parse(JSON.stringify(childTemplate));
+          //Parse data for every item in the child
+          await Promise.all(child.map(async (childComponent) => await parseComponentWithTags(childComponent, newTagData, queryData)));
+
+          //Push the child as a child for the component
+          component.children.push(child);
+        })
+      );
+    }
+  }
+
   if (component.name == "gridCollectionCell" && component.data.array && component.data.array != "") {
     //Get the correspondending array from the api
     var arrayData = retrieveJsonProperty(itterationTagData, component.data.array);
+
     if (component.data.sortProperty != null && component.data.sortProperty != "") {
       var sortData = retrieveJsonProperty(itterationTagData, "{[" + component.data.sortProperty + "]}");
       var sortArray = [];
@@ -180,7 +245,7 @@ const parseComponentWithTags = async function (component, tagData, queryData) {
   }
 
   //If component has data then it needs to be parsed
-  if (component.data && !["gridCollectionCell", "tagExpander"].includes(component.name)) parseComponentDataWithTags(component.data, itterationTagData);
+  if (component.data && !["gridCollectionCell", "tagExpander", "tabs"].includes(component.name)) parseComponentDataWithTags(component.data, itterationTagData);
 
   //If the component is not a gridCollectionCell then parse other components
   if (!["gridCollectionCell"].includes(component.name) && component.children && component.children.length != 0) {

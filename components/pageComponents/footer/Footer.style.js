@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledFooter = styled.div`
   margin-top: 128px;
-  border-top: solid 8px #e13703;
+  border-top: solid 8px #da4167;
   background-color: #2d2d2d;
   color: #bfbfbf;
   font-size: 0.95rem;

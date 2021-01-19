@@ -20,14 +20,18 @@ const Paragraph = function (props) {
 
 const Component = function ({component, ...props}) {
   const data = component.data;
-  if (!data.renderDynamicText) {
-    return <StyledParagraph {...data} dangerouslySetInnerHTML={{__html: replaceMarkup(data.staticText)}} />;
+  if (props.liveMode == false) {
+    return <StyledParagraph>[{data.label}]</StyledParagraph>;
   } else {
-    return (
-      <StyledParagraph>
-        <DynamicTextPresenter {...data} data={data.dynamicText} />
-      </StyledParagraph>
-    );
+    if (!data.renderDynamicText) {
+      return <StyledParagraph {...data} dangerouslySetInnerHTML={{__html: replaceMarkup(data.staticText)}} />;
+    } else {
+      return (
+        <StyledParagraph>
+          <DynamicTextPresenter {...data} data={data.dynamicText} />
+        </StyledParagraph>
+      );
+    }
   }
 };
 

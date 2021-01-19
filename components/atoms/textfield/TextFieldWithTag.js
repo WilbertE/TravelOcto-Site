@@ -23,6 +23,7 @@ const TextFieldWithTag = function ({allowed, mustSelectTag, isArraySelector, ...
   };
 
   const handleVariableSelect = (variableName) => {
+    console.log(props.value);
     props.onChange({
       target: {
         name: props.name,

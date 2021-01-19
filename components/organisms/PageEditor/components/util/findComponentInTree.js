@@ -2,8 +2,13 @@ const findComponentInTree = function (component, id) {
   var result = null;
   if (component.id == id) result = {component: component, index: 0, parent: null};
 
-  if (component.children) {
-    component.children.map((child, index) => {
+  var componentChildren = component.children;
+  console.log(component.name);
+  if (component.name == "ifBlock") {
+    componentChildren = component.data.data[component.data.selectedCondition].children;
+  }
+  if (componentChildren) {
+    componentChildren.map((child, index) => {
       if (result == null) {
         if (child.id == id) {
           result = {component: child, index: index, parent: component};

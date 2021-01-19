@@ -38,6 +38,11 @@ const apiEndpoints = function (TravelOctoBase, ScoutingHawkBase) {
   registerEndpoint("getBlogByUrl", "GET", TravelOctoBase + "blog?url={url}", false);
   registerEndpoint("deleteBlog", "DELETE", TravelOctoBase + "blog/{blogId}", true);
   registerEndpoint("deletePage", "DELETE", TravelOctoBase + "page/{pageId}", true);
+  registerEndpoint("createMenu", "POST", TravelOctoBase + "menu", true);
+  registerEndpoint("readMenu", "GET", TravelOctoBase + "menu/{menuId}", false);
+  registerEndpoint("readMenus", "GET", TravelOctoBase + "menu", true);
+  registerEndpoint("deleteMenu", "DELETE", TravelOctoBase + "menu/{menuId}", true);
+  registerEndpoint("saveMenu", "PATCH", TravelOctoBase + "menu/{menuId}", true);
 
   return endpoints;
 };

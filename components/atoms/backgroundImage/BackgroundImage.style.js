@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-const StyledBackgroundImage = styled.picture`
+const BackgroundImagePrimitive = function ({mode, ...props}) {
+  return <picture {...props}>{props.children}</picture>;
+};
+
+const StyledBackgroundImage = styled(BackgroundImagePrimitive)`
   width: 100%;
   display: block;
   height: 100%;
-  position: absolute;
+  position: ${(props) => (props.mode == "image" ? "relative" : "absolute")};
 
   > img {
     max-width: 100%;

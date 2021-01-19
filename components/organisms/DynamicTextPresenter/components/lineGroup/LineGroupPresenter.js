@@ -4,7 +4,8 @@ import SwitchBlockPresenter from "../switchBlock/SwitchBlockPresenter";
 import TextBlockPresenter from "../textBlock/textBlockPresenter";
 
 const LineGroupPresenter = function (props) {
-  const variant = randomNumberWithSeed(0, props.component.data.length - 1, props.component.id);
+  const variant = randomNumberWithSeed(0, props.component.data.length - 1, JSON.stringify(props.component.data));
+
   return (
     <>
       {props.component.data[variant].data.map((component, key) => {

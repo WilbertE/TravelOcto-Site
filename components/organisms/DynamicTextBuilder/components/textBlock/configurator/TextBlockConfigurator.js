@@ -10,6 +10,7 @@ import {selectionExpander} from "./util/selectionExpander";
 import MessageboxStoreManager from "~/components/molecules/Messagebox/MessageboxFactory";
 import {messageboxState} from "~/components/molecules/Messagebox/MessageboxAtom";
 import LinkBuilder from "./components/LinkBuilder";
+import {useDebounce} from "~/util/useDebounce";
 
 const TextBlockConfigurator = function (props) {
   const [tags, setTags] = useRecoilState(tagsState);
@@ -20,19 +21,28 @@ const TextBlockConfigurator = function (props) {
   const [selection, setSelection] = useState({start: 0, end: 0, content: ""});
   const messageboxStateAtom = useRecoilState(messageboxState);
   const textareaRef = useRef(null);
+  const [textUpdateTime, setTextUpdateTime] = useState(0);
+  const debouncedText = useDebounce(textUpdateTime, 500);
   const toggleVariableDialog = () => setShowVariableSelector(!showVariableSelector);
   const toggleSynonymDialog = () => setShowSynonymDialog(!showSynonymDialog);
   const toggleLinkDialog = () => setShowLinkDialog(!showLinkDialog);
 
-  const handleSelectionChange = () => {
+  useEffect(() => {
+    handleTextareaChange();
+  }, [debouncedText]);
+
+  const handleSelectionChange = (typing) => {
     const selectionStart = textareaRef.current.selectionStart;
     const selectionEnd = textareaRef.current.selectionEnd;
     var {adjustedStart, adjustedEnd} = selectionExpander(textareaRef.current.value, selectionStart, selectionEnd);
     setSelection({start: adjustedStart, end: adjustedEnd, content: textareaRef.current.value.substring(adjustedStart, adjustedEnd)});
-    requestAnimationFrame(() => {
-      textareaRef.current.focus();
-      textareaRef.current.setSelectionRange(adjustedStart, adjustedEnd);
-    });
+    if (typing == null) {
+      console.log("Set selection");
+      requestAnimationFrame(() => {
+        textareaRef.current.focus();
+        textareaRef.current.setSelectionRange(adjustedStart, adjustedEnd);
+      });
+    }
   };
 
   const handleSelectionClear = () => {
@@ -109,8 +119,8 @@ const TextBlockConfigurator = function (props) {
           onMouseDown={handleSelectionClear}
           onMouseUp={handleSelectionChange}
           onFocus={handleSelectionChange}
-          onKeyUp={handleSelectionChange}
-          onChange={handleTextareaChange}
+          onKeyUp={() => handleSelectionChange(true)}
+          onChange={() => setTextUpdateTime(Date.now())}
           defaultValue={props.segment.data}
         />
         <div className="tools">

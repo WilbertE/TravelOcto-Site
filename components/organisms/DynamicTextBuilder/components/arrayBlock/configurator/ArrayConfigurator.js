@@ -31,10 +31,10 @@ const ArrayConfigurator = function (props) {
     replaceForm({
       prefixSingle: props.segment.data.prefixSingle,
       prefixMultiple: props.segment.data.prefixMultiple,
-      array: props.segment.data.array.replace("{[", "").replace("]}", ""),
-      field: props.segment.data.field.replace("{[", "").replace("]}", ""),
+      array: props.segment.data.array ? props.segment.data.array.replace("{[", "").replace("]}", "") : "",
+      field: props.segment.data.field ? props.segment.data.field.replace("{[", "").replace("]}", "") : "",
       limit: props.segment.data.limit,
-      sortField: props.segment.data.sortField.replace("{[", "").replace("]}", ""),
+      sortField: props.segment.data.sortField ? props.segment.data.sortField.replace("{[", "").replace("]}", "") : "",
       sortMethod: props.segment.data.sortMethod,
       divider: props.segment.data.divider,
       lastDivider: props.segment.data.lastDivider,

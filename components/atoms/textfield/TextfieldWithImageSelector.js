@@ -46,7 +46,7 @@ const TextfieldWithImageSelector = function (props) {
         <div className="form">
           {props.altLabel && (
             <TextFieldWithTag
-              allowed={["string", "integer"]}
+              allowed={["string", "imageSet"]}
               tags={props.tags}
               onChange={props.onChange}
               label={props.altLabel}
@@ -56,7 +56,9 @@ const TextfieldWithImageSelector = function (props) {
           )}
         </div>
       </StyledTextfieldWithImageSelector>
-      {showVariableDialog && <VariableSelector allowed={["string"]} tags={props.tags} onSelect={handleVariableSelect} onClose={toggleVariableDialog} />}
+      {showVariableDialog && (
+        <VariableSelector allowed={["string", "imageSet"]} tags={props.tags} onSelect={handleVariableSelect} onClose={toggleVariableDialog} />
+      )}
       {openImageGallery && <ImageGallery onClose={toggleImageGallery} onSelect={handleSelectImage} />}
     </>
   );

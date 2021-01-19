@@ -14,6 +14,10 @@ import {defaultGridCollectionCellProps} from "../gridCollectionCell/defaultProps
 import {defaultPhotoCardProps} from "../photoCard/defaultProps";
 import {defaultParagraphProps} from "../paragraph/defaultProps";
 import {defaultTagsProps} from "../tagExpander/defaultProps";
+import {defaultMenuProps} from "../menu/defaultProps";
+import {defaultImageProps} from "../image/defaultProps";
+import {defaultTabsProps} from "../tabs/defaultProps";
+import {defaultIfBlockProps} from "../ifBlock/defaultProps";
 
 const ComponentChooser = function ({component, parent, location, ...props}) {
   const [updateComponent, setUpdateComponent] = useRecoilState(addComponentState);
@@ -44,13 +48,17 @@ const ComponentChooser = function ({component, parent, location, ...props}) {
     });
   };
 
-  registerButton(["fal", "h-square"], "Header", "header", defaultHeaderProps);
+  registerButton(["fal", "tags"], "Tag uitbreider", "tagExpander", defaultTagsProps);
   registerButton(["fal", "square"], "Container", "container", defaultContainerProps);
+  registerButton(["fal", "brackets-curly"], "Conditioneel", "ifBlock", defaultIfBlockProps);
+  registerButton(["fal", "th-large"], "Grid", "grid", defaultGridProps);
+  registerButton(["fal", "h-square"], "Header", "header", defaultHeaderProps);
+  registerButton(["fal", "columns"], "Tabs", "tabs", defaultTabsProps);
+  registerButton(["fal", "sitemap"], "Menu", "menu", defaultMenuProps);
   registerButton(["fal", "heading"], "Titel", "title", defaultTitleProps);
   registerButton(["fal", "align-justify"], "Paragraaf", "paragraph", defaultParagraphProps);
-  registerButton(["fal", "th-large"], "Grid", "grid", defaultGridProps);
   registerButton(["fal", "image-polaroid"], "Foto kaart", "photoCard", defaultPhotoCardProps);
-  registerButton(["fal", "tags"], "Tag uitbreider", "tagExpander", defaultTagsProps);
+  registerButton(["fal", "image"], "Afbeelding", "image", defaultImageProps);
 
   if (parent.name == "grid") {
     buttons = [];

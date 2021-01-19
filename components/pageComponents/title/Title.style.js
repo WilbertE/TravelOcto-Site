@@ -11,7 +11,7 @@ const StyledTitle = styled(TitlePrimitive)`
     props.underline &&
     `
       padding: 0 0 2rem 0px;
-    &:after{
+      &:after{
         display: block;
         content: "";
         width: 50px;
@@ -21,6 +21,7 @@ const StyledTitle = styled(TitlePrimitive)`
     }`}
     ${(props) => props.alignment == "center" && `&:after{margin: 0px auto;}`}
     ${(props) => props.alignment == "right" && `&:after{margin: 0px 0px 0px auto;}`}
+    ${(props) => props.variant == "h3" && `color:#0A5A87;`}
 
     @media screen and (min-width:960px) {
     &:after {

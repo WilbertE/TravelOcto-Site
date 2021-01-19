@@ -6,7 +6,6 @@ import TextfieldWithImageSelector from "~/components/atoms/textfield/TextfieldWi
 import TextFieldWithTag from "~/components/atoms/textfield/TextFieldWithTag";
 
 const GridCellConfigurator = function ({component, form, setForm, resetForm, updateForm, ...props}) {
-  console.log(form);
   var options = [
     [form.sizeXs, "sizeXs", "mobiel"],
     [form.sizeSm, "sizeSm", "tablet"],

@@ -29,6 +29,11 @@ const ParagraphConfigurator = function ({component, form, setForm, resetForm, up
             ]}
           />
         </Grid>
+        {form.renderDynamicText && (
+          <Grid item xs={12}>
+            <TextField onChange={setForm} value={form.label} label="Label" name="label" />
+          </Grid>
+        )}
         <Grid item xs={12}>
           <Select
             label="Marge aan onderkant"

@@ -20,6 +20,7 @@ const Header = function ({liveMode, ...props}) {
 
 const Component = function ({component, ...props}) {
   const data = component.data;
+
   return (
     <StyledHeader height={data.height}>
       <BackgroundImage data-parallax="17" alt={data.backgroundImageAlt} image={data.backgroundImage} />

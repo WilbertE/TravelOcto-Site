@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useRecoilState} from "recoil";
 import {deleteComponentState, updateComponentState} from "~/components/organisms/PageEditor/componentAtoms";
 import useForm from "~/util/form";
@@ -17,8 +17,15 @@ const Configurable = function (props) {
   const [deleteComponent, setDeleteComponent] = useRecoilState(deleteComponentState);
   const messageboxStateAtom = useRecoilState(messageboxState);
   const [hover, setHover] = useState(false);
+  const [beforeSave, setBeforeSave] = useState(null);
 
-  const handleSave = () => {
+  // useEffect(() => {
+  //   updateForm({...props.component.data});
+  // }, [props.component.data]);
+
+  const handleSave = async () => {
+    if (beforeSave && beforeSave.asyncFunc) await beforeSave.asyncFunc();
+    if (beforeSave && beforeSave.func) await beforeSave.Func();
     const newComponent = JSON.parse(JSON.stringify(props.component));
     newComponent.data = form;
     setUpdateComponent(newComponent);
@@ -78,9 +85,17 @@ const Configurable = function (props) {
           preview={props.preview}
           onClose={toggleConfigurator}
           title={props.title}
+          additionalButtons={props.additionalButtons}
           open={true}>
           <ConfigurableFrame preview={props.preview} data={form} component={props.component}>
-            {React.cloneElement(props.configurator, {component: props.component, form: form, setForm: setForm, resetForm: resetForm, updateForm: updateForm})}
+            {React.cloneElement(props.configurator, {
+              component: props.component,
+              setBeforeSave: setBeforeSave,
+              form: form,
+              setForm: setForm,
+              resetForm: resetForm,
+              updateForm: updateForm,
+            })}
           </ConfigurableFrame>
           <DialogActions>
             <Button onClick={handleSave}>Opslaan</Button>

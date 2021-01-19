@@ -6,10 +6,12 @@ import {useRecoilState} from "recoil";
 
 const VariableRow = function ({value, allowed, readonly, ...props}) {
   const messageboxStateAtom = useRecoilState(messageboxState);
-  const type = Array.isArray(value) ? "array" : typeof value;
+  let type = Array.isArray(value) ? "array" : typeof value;
 
   if (type == "array") value = "[" + JSON.stringify(value[0], null, 4) + ",\n{...}]";
   if (type == "object") value = JSON.stringify(value, null, 4);
+  if (type == "array" && props.name.endsWith(".images")) type = "imageSet";
+  if (type == "string" && value.startsWith('{"type"')) type = "geojson";
 
   const handleSelect = () => {
     if (readonly) return;

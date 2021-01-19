@@ -13,6 +13,11 @@ import Header from "./header/Header";
 import PhotoCard from "./photoCard/photoCard";
 import Title from "./title/Title";
 import Paragraph from "./paragraph/Paragraph";
+import Menu from "./menu/Menu";
+import {defaultImageProps} from "./image/defaultProps";
+import Image from "./image/Image";
+import Tabs from "./tabs/Tabs";
+import IfBlock from "./ifBlock/IfBlock";
 
 const ComponentRender = function ({component, apiData, parent, ...props}) {
   const [liveMode, setLiveMode] = useRecoilState(pageRenderState);
@@ -81,8 +86,16 @@ const Component = function ({component, apiData, ...props}) {
         return <TagExpander liveMode={liveMode} component={component} apiData={apiData} />;
       case "dynamicText":
         return <DynamicText liveMode={liveMode} component={component} apiData={apiData} />;
-      case "testComponent":
-        return <>This is a test component</>;
+      case "menu":
+        return <Menu liveMode={liveMode} component={component} apiData={apiData} />;
+      case "image":
+        return <Image liveMode={liveMode} component={component} apiData={apiData} />;
+      case "tabs":
+        return <Tabs liveMode={liveMode} component={component} apiData={apiData} />;
+      case "ifBlock":
+        return <IfBlock liveMode={liveMode} component={component} apiData={apiData} />;
+      default:
+        return <>Component not in renderer '{component.name}'</>;
     }
   }
   return <></>;

@@ -55,7 +55,7 @@ const VariableSelector = function (props) {
         }
 
         var apiData = response.result;
-        console.log(selectedTag);
+
         if (selectedTag.indexOf("[]") > -1) apiData = getTagArrayNode(apiData, selectedTagGroups);
         setVariables(apiData);
       })();
@@ -67,9 +67,10 @@ const VariableSelector = function (props) {
     if (!Array.isArray(variableValue) && typeof variableValue === "object") {
       return (
         <React.Fragment key={key}>
-          {Object.keys(variableValue).map((subVariable, subKey) => {
-            return insertRow(subVariable, variableValue[subVariable], variableChainName + "." + variableName, key + "_" + subKey);
-          })}
+          {variableValue &&
+            Object.keys(variableValue).map((subVariable, subKey) => {
+              return insertRow(subVariable, variableValue[subVariable], variableChainName + "." + variableName, key + "_" + subKey);
+            })}
         </React.Fragment>
       );
     } else {

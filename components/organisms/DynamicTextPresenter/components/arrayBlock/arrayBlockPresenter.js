@@ -2,6 +2,7 @@ import {AbstractRecoilValueReadonly} from "recoil";
 
 const ArrayBlockPresenter = function ({component, ...props}) {
   var array = component.data.field.split(",");
+
   var sortFieldArray = component.data.sortField != "" ? component.data.sortField.split(",") : null;
 
   if (sortFieldArray) {

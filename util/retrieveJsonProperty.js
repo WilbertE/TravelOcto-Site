@@ -1,6 +1,7 @@
+import JsonSaveString from "./jsonSaveString";
+
 const searchTag = (json, tagGroups) => {
   var tag = tagGroups.shift();
-
   var tagIsArray = false;
   if (tag.endsWith("[]")) {
     tagIsArray = true;
@@ -35,7 +36,27 @@ const retrieveJsonProperty = (tags, selectedTag) => {
   if (baseIsArray) variableBase = variableBase.substring(0, variableBase.length - 2);
 
   //Find correspondeding tag
-  const tagGroup = tags.find((tag) => tag.name.toLowerCase() == variableBase.toLowerCase());
+  let tagGroup = tags.find((tag) => tag.name.toLowerCase() == variableBase.toLowerCase());
+
+  if (tagGroup == null) {
+    var variableBaseParts = variableBase.split(".");
+    for (var i = variableBaseParts.length - 1; i >= 0; i--) {
+      tagGroup = tags.find((tag) => tag.name.toLowerCase() == variableBaseParts[i].toLowerCase());
+      if (tagGroup) {
+        var leftOver = variableBaseParts.slice(i + 1, variableBaseParts.length);
+        var tried = variableBaseParts.slice(0, variableBaseParts.length - 1);
+        var newTagGroup = new Object();
+        var b = selectedTag.replace(tried.join(".") + ".", "");
+        var n = b.split(".")[0].replace("[]", "");
+        newTagGroup.apiData = searchTag(tagGroup.apiData, leftOver);
+        newTagGroup.name = n;
+        var newSearch = initialTag.replace(tried.join(".") + ".", "");
+        var result = retrieveJsonProperty([newTagGroup], newSearch);
+        return result;
+      }
+    }
+  }
+
   if (tagGroup == null) return "Parse error [" + selectedTag + "] (group not found)";
   if (tagGroup.apiData == null) return "Parse error [" + selectedTag + "] (group no data)";
 
@@ -55,7 +76,8 @@ const retrieveJsonProperty = (tags, selectedTag) => {
 
   var value = searchTag(json, selectedTagGroups);
   if (value == null) return "Parse error [" + selectedTag + "] (value not exist)";
+  if (typeof value == "string") value = JsonSaveString(value);
   return value;
 };
 
-export {retrieveJsonProperty};
+export {retrieveJsonProperty, searchTag};
