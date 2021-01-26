@@ -18,6 +18,8 @@ import {defaultImageProps} from "./image/defaultProps";
 import Image from "./image/Image";
 import Tabs from "./tabs/Tabs";
 import IfBlock from "./ifBlock/IfBlock";
+import CurrencyConverter from "./currencyConverter/CurrencyConverter";
+import CurrencyRateTable from "./currencyRateTable/CurrencyRateTable";
 
 const ComponentRender = function ({component, apiData, parent, ...props}) {
   const [liveMode, setLiveMode] = useRecoilState(pageRenderState);
@@ -94,6 +96,10 @@ const Component = function ({component, apiData, ...props}) {
         return <Tabs liveMode={liveMode} component={component} apiData={apiData} />;
       case "ifBlock":
         return <IfBlock liveMode={liveMode} component={component} apiData={apiData} />;
+      case "currencyConverter":
+        return <CurrencyConverter liveMode={liveMode} component={component} apiData={apiData} />;
+      case "currencyRateTable":
+        return <CurrencyRateTable liveMode={liveMode} component={component} apiData={apiData} />;
       default:
         return <>Component not in renderer '{component.name}'</>;
     }

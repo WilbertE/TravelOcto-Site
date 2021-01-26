@@ -74,6 +74,8 @@ import {
   faImage,
   faColumns,
   faBracketsCurly,
+  faCalculator,
+  faExchange,
 } from "@fortawesome/pro-light-svg-icons";
 
 import {faExclamationTriangle} from "@fortawesome/pro-solid-svg-icons";
@@ -154,7 +156,9 @@ library.add(
   faFilePlus,
   faImage,
   faColumns,
-  faBracketsCurly
+  faBracketsCurly,
+  faCalculator,
+  faExchange
 );
 
 const GlobalStoreProvider = function (props) {

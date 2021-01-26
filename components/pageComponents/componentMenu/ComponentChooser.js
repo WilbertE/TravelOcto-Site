@@ -18,6 +18,7 @@ import {defaultMenuProps} from "../menu/defaultProps";
 import {defaultImageProps} from "../image/defaultProps";
 import {defaultTabsProps} from "../tabs/defaultProps";
 import {defaultIfBlockProps} from "../ifBlock/defaultProps";
+import {defaultCurrencyRateTableProps} from "../currencyRateTable/defaultProps";
 
 const ComponentChooser = function ({component, parent, location, ...props}) {
   const [updateComponent, setUpdateComponent] = useRecoilState(addComponentState);
@@ -59,6 +60,8 @@ const ComponentChooser = function ({component, parent, location, ...props}) {
   registerButton(["fal", "align-justify"], "Paragraaf", "paragraph", defaultParagraphProps);
   registerButton(["fal", "image-polaroid"], "Foto kaart", "photoCard", defaultPhotoCardProps);
   registerButton(["fal", "image"], "Afbeelding", "image", defaultImageProps);
+  registerButton(["fal", "calculator"], "Koerstool", "currencyConverter", defaultContainerProps);
+  registerButton(["fal", "exchange"], "Koerstabel", "currencyRateTable", defaultCurrencyRateTableProps);
 
   if (parent.name == "grid") {
     buttons = [];

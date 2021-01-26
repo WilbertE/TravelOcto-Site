@@ -39,7 +39,7 @@ const Menu = function ({liveMode, ...props}) {
       endpoint: api.endpoints.readMenu,
       urlReplacements: [["menuId", props.component.data.menuId]],
     });
-    console.log(response);
+
     if (response != null && response.success == false) MessageboxStoreManager.AddMessage(messageboxStateAtom, response.message);
     if (response != null && response.success == true) setMenu({name: response.result.name, menuItems: JSON.parse(response.result.data).menuItems});
   };
