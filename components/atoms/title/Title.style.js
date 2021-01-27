@@ -14,8 +14,8 @@ export const StyledTitle = styled(TitlePrimitive)`
   ${(props) => (props.variant == "h1" ? "font-size: 2.75rem; " : "")}
   ${(props) => (props.variant == "h2" ? "font-size: 1.75rem; font-weight: 300;" : "")}
   ${(props) => (props.variant == "h3" ? "font-size: 1.75rem; font-weight: 300; margin-bottom:16px;" : "")}
-  ${(props) => (props.variant == "h4" ? "font-family: 'Lato',sans-serif; font-size: 1.25rem; font-weight: 300;  color: #323E7A;" : "")}
-  ${(props) => (props.variant == "h5" ? "font-family: 'Lato',sans-serif; font-size: 1.1rem; color: #323E7A;" : "")}
+  ${(props) => (props.variant == "h4" ? "font-family: 'Lato',sans-serif; font-size: 1.25rem;  color: #0A5A87;" : "")}
+  ${(props) => (props.variant == "h5" ? "font-family: 'Lato',sans-serif; font-size: 1.1rem; color: #0A5A87;" : "")}
   ${(props) => props.center && "text-align: center;"}
 
   @media screen and (min-width: 960px) {
