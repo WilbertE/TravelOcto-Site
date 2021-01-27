@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyledCurrencyRateTable = styled.div`
+  margin-bottom: 32px;
   .row {
     display: flex;
     max-width: 800px;
