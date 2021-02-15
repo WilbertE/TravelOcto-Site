@@ -5,6 +5,10 @@ const StyledLinkBuilder = styled(Dialog)`
   .MuiPaper-root {
     width: 500px;
   }
+
+  .MuiCheckbox-colorSecondary.Mui-checked {
+    color: #323e7a;
+  }
 `;
 
 export {StyledLinkBuilder};

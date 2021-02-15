@@ -1,7 +1,7 @@
 import {FooterLoader} from "~/components/pageComponents/footer/FooterLoader";
 import ErrorTemplate from "~/components/templates/error/Error";
 import Api from "~/util/api";
-import {pageTagLoader} from "~/util/pageTagLoader";
+import {pageTagLoader, parseStringWithTags} from "~/util/pageTagLoader";
 import DynamicPage from "./dynamicPage";
 
 const Page = (props) => {
@@ -32,6 +32,9 @@ Page.getInitialProps = async ({query, ctx}) => {
 
   //Parse pagedata
   await pageTagLoader(pageData, {queryTemplate: pageData.url, queryData: query});
+
+  pageData.meta.title = parseStringWithTags(pageData.meta.title, pageData.components.tags);
+  pageData.meta.description = parseStringWithTags(pageData.meta.description, pageData.components.tags);
 
   //Return page and footer data
   return {pageData: pageData, footerData: footerData};

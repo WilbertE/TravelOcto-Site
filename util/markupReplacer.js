@@ -4,9 +4,12 @@ const replaceMarkup = (str, id) => {
   let newStr = "";
 
   //replace links
-  newStr = str.replace(new RegExp(/\[a\s*?target='(.*?)'\s*?href='(.*?)'\s*?\]((?!\[).*)\[\/a]/, "gi"), function (a, b, c, d) {
-    return `<a href="${c}" target="${b}">${d}</a>`;
-  });
+  newStr = str.replace(
+    new RegExp("(\\[a\\ target='((?!').*?)' (rel='((?!').*?)'\\ |)href='((?!').*?)'\\]((?!\\[\\/a\\]).*?)\\[\\/a\\])", "gi"),
+    function (a, b, c, d, e, f, g) {
+      return `<a href="${f}" target="${c}" rel="${e}">${g}</a>`;
+    }
+  );
 
   //replace new lines
   newStr = newStr.replace(new RegExp(/\n/, "gi"), "<br/>");

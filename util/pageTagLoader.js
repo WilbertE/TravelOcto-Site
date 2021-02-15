@@ -272,4 +272,4 @@ const pageTagLoader = async function (pageData, queryData) {
   return;
 };
 
-export {pageTagLoader};
+export {pageTagLoader, parseStringWithTags};
