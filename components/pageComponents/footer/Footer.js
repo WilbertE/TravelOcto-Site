@@ -84,7 +84,7 @@ const Footer = function ({data, ...props}) {
       <script
         dangerouslySetInnerHTML={{
           __html:
-            "var _TradeTrackerTagOptions = { t: 'a', s: '358221', chk: 'f435571a43910ff210e517b6e9bcacd9', overrideOptions: {} }; (function() {var tt = document.createElement('script'), s = document.getElementsByTagName('script')[0]; tt.setAttribute('type', 'text/javascript'); tt.setAttribute('src', (document.location.protocol == 'https:' ? 'https' : 'http') + '://tm.tradetracker.net/tag?t=' + _TradeTrackerTagOptions.t + '&amp;s=' + _TradeTrackerTagOptions.s + '&amp;chk=' + _TradeTrackerTagOptions.chk); s.parentNode.insertBefore(tt, s);})();",
+            "var _TradeTrackerTagOptions = {t: 'a',s: '370553',chk: '92548de6aaf982a9fcae4b127efda7e7',overrideOptions: {}};(function() {var tt = document.createElement('script'), s = document.getElementsByTagName('script')[0]; tt.setAttribute('type', 'text/javascript'); tt.setAttribute('src', (document.location.protocol == 'https:' ? 'https' : 'http') + '://tm.tradetracker.net/tag?t=' + _TradeTrackerTagOptions.t + '&amp;s=' + _TradeTrackerTagOptions.s + '&amp;chk=' + _TradeTrackerTagOptions.chk); s.parentNode.insertBefore(tt, s);})();",
         }}
       />
     </StyledFooter>
